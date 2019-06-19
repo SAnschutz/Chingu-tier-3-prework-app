@@ -10,7 +10,6 @@ const SearchForm = () => {
   const [currentCameraData, setCurrentCameraData] = useState('');
   const [picArray, setPicArray] = useState('');
   const [, dispatch] = useReducer(picsReducer, []);
-  // const { pics } = useContext(PicsContext);
 
   const onChangeSolData = e => setSolData(e.target.value);
   const onChangeCameraData = e => setCameraData(e.target.value);
@@ -62,10 +61,16 @@ const SearchForm = () => {
       {picArray && (
         <div>
           <p>
-            Showing results for Sol: {currentSolData}, Camera:{' '}
-            {currentCameraData.toUpperCase()}
+            <strong>
+              Showing results for Sol: {currentSolData}, Camera:{' '}
+              {currentCameraData.toUpperCase()}
+            </strong>
           </p>
-          <p>Click on any photo to get full-size image</p>
+          <p>
+            {picArray.length > 0
+              ? 'Click on any photo to get full-size image'
+              : 'No photos available'}
+          </p>
         </div>
       )}
       {picArray && picArray.map(pic => <Result key={pic} image={pic} />)}

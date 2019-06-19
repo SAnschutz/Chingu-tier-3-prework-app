@@ -5,7 +5,6 @@ import Text from './components/Text';
 import SearchForm from './components/SearchForm';
 import PicsContext from './context/PicsContext';
 import picsReducer from './reducers/pics';
-// import axios from 'axios';
 
 const App = () => {
   const [pics, dispatch] = useReducer(picsReducer, []);

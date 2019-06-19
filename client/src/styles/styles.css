@@ -35,6 +35,7 @@ body {
   top: 12vh;
   left: 3vw;
   width: 18vw;
+  border: 5px #f7deca solid;
 }
 
 .title h1 {
