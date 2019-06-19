@@ -6,6 +6,8 @@ import Result from '../components/Result';
 const SearchForm = () => {
   const [solData, setSolData] = useState('');
   const [cameraData, setCameraData] = useState('');
+  const [currentSolData, setCurrentSolData] = useState('');
+  const [currentCameraData, setCurrentCameraData] = useState('');
   const [picArray, setPicArray] = useState('');
   const [, dispatch] = useReducer(picsReducer, []);
   // const { pics } = useContext(PicsContext);
@@ -18,37 +20,54 @@ const SearchForm = () => {
     axios.get(`/api/roverquery/${sol}/${camera}/${page}`).then(results => {
       dispatch({ type: 'ADD_PICS', newPics: results.data });
       setPicArray(results.data);
+      setCurrentSolData(sol);
+      setCurrentCameraData(camera);
+      setSolData('');
+      setCameraData('');
     });
   };
 
   return (
-    <div>
+    <div class='submit-form'>
       <form
         onSubmit={e => {
           e.preventDefault();
           getPicUrls(solData, cameraData);
         }}
       >
-        <label>Sol</label>
-        <input
-          type='text'
-          placeholder='Sol'
-          name='sol'
-          value={solData}
-          onChange={e => onChangeSolData(e)}
-          required
-        />
-        <label>Camera</label>
-        <input
-          type='text'
-          placeholder='Camera'
-          name='camera'
-          value={cameraData}
-          onChange={e => onChangeCameraData(e)}
-          required
-        />
+        <div className='input' id='sol-input'>
+          <label>Sol</label>
+          <input
+            type='text'
+            placeholder='Mission Day Number'
+            name='sol'
+            value={solData}
+            onChange={e => onChangeSolData(e)}
+            required
+          />
+        </div>
+        <div className='input' id='camera-input'>
+          <label>Camera</label>
+          <input
+            type='text'
+            placeholder='Camera'
+            name='camera'
+            value={cameraData}
+            onChange={e => onChangeCameraData(e)}
+            required
+          />
+        </div>
         <button>Get Photos</button>
       </form>
+      {picArray && (
+        <div>
+          <p>
+            Showing results for Sol: {currentSolData}, Camera:{' '}
+            {currentCameraData.toUpperCase()}
+          </p>
+          <p>Click on any photo to get full-size image</p>
+        </div>
+      )}
       {picArray && picArray.map(pic => <Result key={pic} image={pic} />)}
     </div>
   );

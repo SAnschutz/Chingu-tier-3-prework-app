@@ -1,6 +1,7 @@
 import React, { useReducer } from 'react';
 import './App.css';
-import Header from './components/Header';
+import Title from './components/Title';
+import Text from './components/Text';
 import SearchForm from './components/SearchForm';
 import PicsContext from './context/PicsContext';
 import picsReducer from './reducers/pics';
@@ -11,8 +12,11 @@ const App = () => {
 
   return (
     <PicsContext.Provider value={{ pics, dispatch }}>
-      <Header />
-      <SearchForm />
+      <Title />
+      <div class='text-box'>
+        <Text />
+        <SearchForm />
+      </div>
     </PicsContext.Provider>
   );
 };
