@@ -12,7 +12,7 @@ const App = () => {
   return (
     <PicsContext.Provider value={{ pics, dispatch }}>
       <Title />
-      <div class='text-box'>
+      <div className='text-box'>
         <Text />
         <SearchForm />
       </div>

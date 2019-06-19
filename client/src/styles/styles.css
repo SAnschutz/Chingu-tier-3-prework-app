@@ -6,6 +6,7 @@
 
 html {
   background: url('../img/Mars-large.jpg') no-repeat center top fixed;
+  background-color: #000;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -40,6 +41,10 @@ body {
 
 .title h1 {
   font-size: 48px;
+}
+
+.text h2 {
+  margin-bottom: 5px;
 }
 
 .text-box {
@@ -128,3 +133,70 @@ button:hover {
 }
 
 /* media queries */
+
+@media (max-width: 1100px) {
+  html {
+    background: url('../img/Mars-large.jpg') no-repeat center 8vh fixed;
+  }
+
+  .title {
+    padding-top: 4vh;
+  }
+
+  .title h1 {
+    font-size: 24px;
+    line-height: 1.2;
+  }
+  .title span {
+    display: block;
+    font-size: 36px;
+  }
+
+  .title img {
+    display: none;
+    /* position: center center;
+    width: 40vw;
+    margin: 0 auto; */
+  }
+
+  .text-box {
+    width: 100%;
+    text-align: center;
+  }
+
+  .text h2 {
+    line-height: 1.3;
+  }
+
+  tbody,
+  tr {
+    width: 100vw;
+    margin: 0 auto;
+    align-content: center;
+  }
+
+  td {
+    width: 100%;
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    align-content: center;
+  }
+
+  .camera {
+    text-decoration: underline;
+    margin-left: 7vw;
+  }
+
+  .description {
+    margin-left: 12vw;
+  }
+
+  .result-cam-and-sol {
+    display: block;
+  }
+
+  .photo {
+    width: 90vw;
+  }
+}

@@ -27,7 +27,7 @@ const SearchForm = () => {
   };
 
   return (
-    <div class='submit-form'>
+    <div className='submit-form'>
       <form
         onSubmit={e => {
           e.preventDefault();
@@ -62,13 +62,15 @@ const SearchForm = () => {
         <div>
           <p>
             <strong>
-              Showing results for Sol: {currentSolData}, Camera:{' '}
-              {currentCameraData.toUpperCase()}
+              Showing results for{' '}
+              <span className='result-cam-and-sol'>
+                Sol: {currentSolData}, Camera: {currentCameraData.toUpperCase()}
+              </span>
             </strong>
           </p>
           <p>
             {picArray.length > 0
-              ? 'Click on any photo to get full-size image'
+              ? 'Click on any photo to get larger image'
               : 'No photos available'}
           </p>
         </div>
