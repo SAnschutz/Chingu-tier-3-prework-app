@@ -16,6 +16,7 @@ const SearchForm = () => {
 
   const getPicUrls = (sol, camera) => {
     const page = 1;
+    const element = document.getElementById('scroll-to');
     axios.get(`/api/roverquery/${sol}/${camera}/${page}`).then(results => {
       dispatch({ type: 'ADD_PICS', newPics: results.data });
       setPicArray(results.data);
@@ -23,6 +24,7 @@ const SearchForm = () => {
       setCurrentCameraData(camera);
       setSolData('');
       setCameraData('');
+      element.scrollIntoView();
     });
   };
 
@@ -56,11 +58,11 @@ const SearchForm = () => {
             required
           />
         </div>
-        <button>Get Photos</button>
+        <button>Fetch Photos</button>
       </form>
       {picArray && (
         <div>
-          <p>
+          <p id='image-point'>
             <strong>
               Showing results for{' '}
               <span className='result-cam-and-sol'>
@@ -68,7 +70,7 @@ const SearchForm = () => {
               </span>
             </strong>
           </p>
-          <p>
+          <p className='no-results'>
             {picArray.length > 0
               ? 'Click on any photo to get larger image'
               : 'No photos available'}

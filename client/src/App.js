@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react';
 import './App.css';
 import Title from './components/Title';
-import Text from './components/Text';
+import TextBox from './components/TextBox';
 import SearchForm from './components/SearchForm';
 import PicsContext from './context/PicsContext';
 import picsReducer from './reducers/pics';
@@ -12,10 +12,8 @@ const App = () => {
   return (
     <PicsContext.Provider value={{ pics, dispatch }}>
       <Title />
-      <div className='text-box'>
-        <Text />
-        <SearchForm />
-      </div>
+      <TextBox />
+      <SearchForm />
     </PicsContext.Provider>
   );
 };

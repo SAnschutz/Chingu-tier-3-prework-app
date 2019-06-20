@@ -17,18 +17,14 @@ body {
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
   font-size: 16px;
+  text-align: center;
   line-height: 1.7;
   color: #291708;
 }
 
 .title {
-  position: relative;
-  display: table;
-  width: 100%;
-  margin: 0 auto;
   background-color: #000;
   color: #f7deca;
-  text-align: center;
 }
 
 .title img {
@@ -43,75 +39,44 @@ body {
   font-size: 48px;
 }
 
+.text {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.border {
+  width: 30vw;
+  margin: 20px auto;
+  padding: 10px;
+  border: 1px solid #291708;
+}
+
 .text h2 {
-  margin-bottom: 5px;
-}
-
-.text-box {
-  display: block;
-  width: 50vw;
-  padding-top: 20vh;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.submit-form {
-  display: block;
-}
-
-table {
-  margin: 0 auto;
+  margin-top: 18vh;
   margin-bottom: 20px;
-  text-align: left;
 }
 
-td {
-  line-height: 1.2;
+.camera {
+  text-decoration: underline;
+  font-weight: bold;
+  line-height: 1;
 }
 
-td.camera {
-  width: 100px;
+.input {
+  margin-left: 8px;
+  display: inline-block;
 }
 
 form {
   position: relative;
-  width: 250px;
-  height: 125px;
-  margin: 0 auto;
-}
-
-#sol-input input {
-  position: absolute;
-  right: 0;
-  width: 70%;
-}
-
-#sol-input label {
-  position: absolute;
-  left: 10px;
-  top: -2px;
-}
-
-#camera-input input {
-  position: absolute;
-  width: 70%;
-  top: 30px;
-  right: 0;
-}
-
-#camera-input label {
-  position: absolute;
-  left: 0;
-  top: 28px;
 }
 
 button {
-  position: absolute;
-  top: 75px;
-  right: 50%;
-  transform: translate(50%, 0);
-  height: 25px;
-  width: 80px;
+  display: block;
+  margin: 0 auto;
+  margin-top: 20px;
+  padding: 5px 20px;
   border: none;
   outline: none;
   border-radius: 10px;
@@ -134,9 +99,10 @@ button:hover {
 
 /* media queries */
 
-@media (max-width: 1100px) {
+@media (max-width: 1000px) {
   html {
     background: url('../img/Mars-large.jpg') no-repeat center 8vh fixed;
+    background-color: #000;
   }
 
   .title {
@@ -154,42 +120,39 @@ button:hover {
 
   .title img {
     display: none;
-    /* position: center center;
-    width: 40vw;
-    margin: 0 auto; */
   }
 
-  .text-box {
-    width: 100%;
+  .text {
+    display: relative;
     text-align: center;
-  }
-
-  .text h2 {
-    line-height: 1.3;
-  }
-
-  tbody,
-  tr {
-    width: 100vw;
-    margin: 0 auto;
-    align-content: center;
-  }
-
-  td {
-    width: 100%;
-    display: block;
-    text-align: center;
-    margin: 0 auto;
-    align-content: center;
   }
 
   .camera {
+    display: block;
     text-decoration: underline;
-    margin-left: 7vw;
+    line-height: 1;
+    text-align: center;
   }
 
   .description {
-    margin-left: 12vw;
+    display: block;
+    margin-bottom: 8px;
+    /* line-height: 1.6; */
+    text-align: center;
+  }
+
+  .border {
+    width: 100%;
+    border: none;
+  }
+
+  .input {
+    position: relative;
+    align-content: right;
+  }
+
+  button {
+    margin-bottom: 5vh;
   }
 
   .result-cam-and-sol {
@@ -198,5 +161,9 @@ button:hover {
 
   .photo {
     width: 90vw;
+  }
+
+  .no-results {
+    margin-bottom: 20vh;
   }
 }
