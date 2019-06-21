@@ -21,7 +21,7 @@ const TextBox = () => {
           <p className='camera'>MAST:</p>
           <p className='description'>Mast Camera</p>
         </div>
-        <div classname='camera-info'>
+        <div className='camera-info'>
           <p className='camera'>CHEMCAM:</p>
           <p className='description'>Chemistry and Camera Complex</p>
         </div>

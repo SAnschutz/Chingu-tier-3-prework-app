@@ -15,9 +15,6 @@ const SearchForm = () => {
 
   const getPicUrls = (sol, camera, page) => {
     const element = document.getElementById('scroll-to');
-    // if (newSolData !== currentSolData || newCameraData !== currentCameraData) {
-    //   setPage(1);
-    // }
 
     axios.get(`/api/roverquery/${sol}/${camera}/${page}`).then(results => {
       setPicArray(results.data.images);
@@ -72,44 +69,50 @@ const SearchForm = () => {
             required
           />
         </div>
-        <button>Fetch Photos</button>
+        <button className='fetch-button'>Fetch Photos</button>
       </form>
       {picArray && (
-        <div>
-          <p id='image-point'>
-            <strong>
-              Results for{' '}
-              <span className='result-cam-and-sol'>
-                Sol: {currentSolData}, Camera: {currentCameraData.toUpperCase()}
-              </span>
-              <div className='num-of-photos'>
-                {picArray && picArray.length > 25 && (
-                  <p>
-                    Showing photos {page * 25 - 24} - {page * 25}
-                  </p>
-                )}
-                {picArray.length > 0 && picArray.length <= 25 && (
-                  <p>
-                    Showing photos {page * 25 - 24} -{' '}
-                    {(page - 1) * 25 + picArray.length}
-                  </p>
-                )}
-              </div>
-            </strong>
+        <div id='image-point'>
+          <p className='result-cam-and-sol'>
+            Results for Sol: {currentSolData}, Camera:{' '}
+            {currentCameraData.toUpperCase()}
           </p>
-          <p className='no-results'>
-            {picArray.length === 0 && page > 1
-              ? 'No more photos available'
-              : picArray.length > 0
-              ? 'Click on any photo to see full-size image'
-              : 'No photos available'}
-          </p>
+          {picArray && picArray.length > 25 && (
+            <p className='num-of-photos'>
+              Showing photos {page * 25 - 24} - {page * 25}
+            </p>
+          )}
+          {picArray.length > 0 && picArray.length <= 25 && (
+            <p>
+              Showing photos {page * 25 - 24} -{' '}
+              {(page - 1) * 25 + picArray.length}
+            </p>
+          )}
+          {picArray.length === 0 && page > 1 ? (
+            <p className='no-results'>No more photos available</p>
+          ) : picArray.length > 0 ? (
+            <p className='full-size'>
+              Click on any photo to see full-size image
+            </p>
+          ) : (
+            <p className='no-results'>No photos available</p>
+          )}
         </div>
       )}
 
       {picArray && picArray.map(pic => <Result key={pic} image={pic} />)}
-      {picArray.length === 25 && <button onClick={nextPage}>Next Page</button>}
-      {page > 1 && <button onClick={prevPage}>Previous Page</button>}
+      <div className='next-prev-buttons'>
+        {page > 1 && (
+          <button onClick={prevPage} className='prev-button'>
+            {'<< '} Previous Page
+          </button>
+        )}
+        {picArray.length === 25 && (
+          <button onClick={nextPage} className='next-button'>
+            Next Page >>
+          </button>
+        )}
+      </div>
     </div>
   );
 };

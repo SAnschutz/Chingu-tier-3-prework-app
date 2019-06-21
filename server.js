@@ -30,13 +30,6 @@ app.get('/api/roverquery/:sol/:camera/:page?', (req, res) => {
       const images = body.photos.map(photo => photo.img_src);
 
       res.send({ numOfPhotos, images });
-
-      // if (page === 1 && images.length < 1) {
-      //   return res.send('No photos available');
-      // } else if (page > 1 && images.length < 1) {
-      //   return res.send('No more photos available');
-      // }
-      // res.send(images);
     }
   );
 });

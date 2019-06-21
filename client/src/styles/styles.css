@@ -68,6 +68,10 @@ body {
   display: inline-block;
 }
 
+label {
+  margin-right: 5px;
+}
+
 form {
   position: relative;
 }
@@ -88,12 +92,32 @@ button:hover {
   background-color: #553419;
 }
 
+.fetch-button {
+  margin-bottom: 10vh;
+}
+
+.result-cam-and-sol {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
 .photo {
   display: block;
   margin: 20px auto;
   width: 450px;
   border: 10px #291708 solid;
   border-radius: 5px;
+}
+
+.next-button,
+.prev-button {
+  display: inline-block;
+  width: 150px;
+  margin: 0 2px 20vh 2px;
+}
+
+.no-results {
+  margin-bottom: 20vh;
 }
 
 /* media queries */
@@ -160,9 +184,5 @@ button:hover {
 
   .photo {
     width: 90vw;
-  }
-
-  .no-results {
-    margin-bottom: 20vh;
   }
 }
