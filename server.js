@@ -26,9 +26,10 @@ app.get('/api/roverquery/:sol/:camera/:page?', (req, res) => {
       if (error) {
         callback('there was an error fetching photos');
       }
+      const numOfPhotos = body.photos.length;
       const images = body.photos.map(photo => photo.img_src);
 
-      res.send(images);
+      res.send({ numOfPhotos, images });
 
       // if (page === 1 && images.length < 1) {
       //   return res.send('No photos available');

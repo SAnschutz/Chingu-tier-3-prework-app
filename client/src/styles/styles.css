@@ -47,13 +47,13 @@ body {
 
 .border {
   width: 30vw;
-  margin: 20px auto;
+  margin: 15px auto;
   padding: 10px;
   border: 1px solid #291708;
 }
 
 .text h2 {
-  margin-top: 18vh;
+  margin-top: 15vh;
   margin-bottom: 20px;
 }
 
@@ -74,8 +74,7 @@ form {
 
 button {
   display: block;
-  margin: 0 auto;
-  margin-top: 20px;
+  margin: 20px auto;
   padding: 5px 20px;
   border: none;
   outline: none;

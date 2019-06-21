@@ -1,31 +1,38 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import picsReducer from '../reducers/pics';
 import Result from '../components/Result';
 
 const SearchForm = () => {
-  const [solData, setSolData] = useState('');
-  const [cameraData, setCameraData] = useState('');
+  const [newSolData, setNewSolData] = useState('');
+  const [newCameraData, setNewCameraData] = useState('');
   const [currentSolData, setCurrentSolData] = useState('');
   const [currentCameraData, setCurrentCameraData] = useState('');
   const [picArray, setPicArray] = useState('');
-  const [, dispatch] = useReducer(picsReducer, []);
+  const [page, setPage] = useState(1);
 
-  const onChangeSolData = e => setSolData(e.target.value);
-  const onChangeCameraData = e => setCameraData(e.target.value);
+  const onChangeSolData = e => setNewSolData(e.target.value);
+  const onChangeCameraData = e => setNewCameraData(e.target.value);
 
-  const getPicUrls = (sol, camera) => {
-    const page = 1;
+  const getPicUrls = (sol, camera, page) => {
     const element = document.getElementById('scroll-to');
+    // if (newSolData !== currentSolData || newCameraData !== currentCameraData) {
+    //   setPage(1);
+    // }
+
     axios.get(`/api/roverquery/${sol}/${camera}/${page}`).then(results => {
-      dispatch({ type: 'ADD_PICS', newPics: results.data });
-      setPicArray(results.data);
+      setPicArray(results.data.images);
       setCurrentSolData(sol);
       setCurrentCameraData(camera);
-      setSolData('');
-      setCameraData('');
+      setNewSolData('');
+      setNewCameraData('');
       element.scrollIntoView();
     });
+  };
+
+  const nextPage = () => {
+    const newPage = page + 1;
+    getPicUrls(currentSolData, currentCameraData, newPage);
+    setPage(newPage);
   };
 
   return (
@@ -33,7 +40,8 @@ const SearchForm = () => {
       <form
         onSubmit={e => {
           e.preventDefault();
-          getPicUrls(solData, cameraData);
+          setPage(1);
+          getPicUrls(newSolData, newCameraData, 1);
         }}
       >
         <div className='input' id='sol-input'>
@@ -42,7 +50,7 @@ const SearchForm = () => {
             type='text'
             placeholder='Mission Day Number'
             name='sol'
-            value={solData}
+            value={newSolData}
             onChange={e => onChangeSolData(e)}
             required
           />
@@ -53,7 +61,7 @@ const SearchForm = () => {
             type='text'
             placeholder='Camera'
             name='camera'
-            value={cameraData}
+            value={newCameraData}
             onChange={e => onChangeCameraData(e)}
             required
           />
@@ -64,20 +72,34 @@ const SearchForm = () => {
         <div>
           <p id='image-point'>
             <strong>
-              Showing results for{' '}
+              Results for{' '}
               <span className='result-cam-and-sol'>
                 Sol: {currentSolData}, Camera: {currentCameraData.toUpperCase()}
               </span>
+              <div className='num-of-photos'>
+                {picArray.length > 25 ? (
+                  <p>
+                    Showing photos {page * 25 - 24} - {page * 25}
+                  </p>
+                ) : (
+                  <p>
+                    Showing photos {page * 25 - 24} -{' '}
+                    {(page - 1) * 25 + picArray.length}
+                  </p>
+                )}
+              </div>
             </strong>
           </p>
           <p className='no-results'>
             {picArray.length > 0
-              ? 'Click on any photo to get larger image'
+              ? 'Click on any photo to see full-size image'
               : 'No photos available'}
           </p>
         </div>
       )}
+
       {picArray && picArray.map(pic => <Result key={pic} image={pic} />)}
+      {picArray.length === 25 && <button onClick={nextPage}>Next Page</button>}
     </div>
   );
 };
