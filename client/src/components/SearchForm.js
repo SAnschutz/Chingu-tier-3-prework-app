@@ -35,6 +35,12 @@ const SearchForm = () => {
     setPage(newPage);
   };
 
+  const prevPage = () => {
+    const newPage = page - 1;
+    getPicUrls(currentSolData, currentCameraData, newPage);
+    setPage(newPage);
+  };
+
   return (
     <div className='submit-form'>
       <form
@@ -77,11 +83,12 @@ const SearchForm = () => {
                 Sol: {currentSolData}, Camera: {currentCameraData.toUpperCase()}
               </span>
               <div className='num-of-photos'>
-                {picArray.length > 25 ? (
+                {picArray && picArray.length > 25 && (
                   <p>
                     Showing photos {page * 25 - 24} - {page * 25}
                   </p>
-                ) : (
+                )}
+                {picArray.length > 0 && picArray.length <= 25 && (
                   <p>
                     Showing photos {page * 25 - 24} -{' '}
                     {(page - 1) * 25 + picArray.length}
@@ -91,7 +98,9 @@ const SearchForm = () => {
             </strong>
           </p>
           <p className='no-results'>
-            {picArray.length > 0
+            {picArray.length === 0 && page > 1
+              ? 'No more photos available'
+              : picArray.length > 0
               ? 'Click on any photo to see full-size image'
               : 'No photos available'}
           </p>
@@ -100,6 +109,7 @@ const SearchForm = () => {
 
       {picArray && picArray.map(pic => <Result key={pic} image={pic} />)}
       {picArray.length === 25 && <button onClick={nextPage}>Next Page</button>}
+      {page > 1 && <button onClick={prevPage}>Previous Page</button>}
     </div>
   );
 };
