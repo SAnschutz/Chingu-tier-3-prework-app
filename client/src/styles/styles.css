@@ -92,10 +92,6 @@ button:hover {
   background-color: #553419;
 }
 
-.fetch-button {
-  margin-bottom: 10vh;
-}
-
 .result-cam-and-sol {
   font-weight: bold;
   text-decoration: underline;
